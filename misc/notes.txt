@@ -1,0 +1,11 @@
+https://smartlaboratory.org/ravdess
+ - Audio-Visual Database of Emotional Speech and Song 
+ - voice actors/scripted lines 
+ - labeled calm, happy, sad, angry, fearful, surprise, and disgust expressions
+
+ https://tspace.library.utoronto.ca/handle/1807/24487
+ - Toronto emotional speech set (TESS) Collection
+ - 2 actresses
+ - recordings portraying 7 emotions
+ - anger, disgust, fear, happiness, pleasant surprise, sadness, and neutral
+ 
