@@ -9,3 +9,8 @@ https://smartlaboratory.org/ravdess
  - recordings portraying 7 emotions
  - anger, disgust, fear, happiness, pleasant surprise, sadness, and neutral
  
+ A better way to extract features from audio is to use Mel Frequency Cepstral Coefficients, or MFCCs for short
+- http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/
+
+- MFCC is used to represent the evnolope of the short time power spectrum cause by the shapening of the vocal tract during certrain vocal inflexions.
+
