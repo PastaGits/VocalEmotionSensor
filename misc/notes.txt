@@ -3,6 +3,21 @@ https://smartlaboratory.org/ravdess
  - voice actors/scripted lines 
  - labeled calm, happy, sad, angry, fearful, surprise, and disgust expressions
 
+    0 Modality (01 = full-AV, 02 = video-only, 03 = audio-only).
+    
+    1 Vocal channel (01 = speech, 02 = song).
+
+    2 Emotion (01 = neutral, 02 = calm, 03 = happy, 04 = sad, 05 = angry, 06 = fearful, 07 = disgust, 08 = surprised).
+
+    3 Emotional intensity (01 = normal, 02 = strong). NOTE: There is no strong  intensity for the ‘neutral’ emotion.
+
+    4 Statement (01 = “Kids are talking by the door”, 02 = “Dogs are sitting by the door”).
+
+    5 Repetition (01 = 1st repetition, 02 = 2nd repetition).
+
+    6 Actor (01 to 24. Odd numbered actors are male, even numbered actors are female).
+
+
  https://tspace.library.utoronto.ca/handle/1807/24487
  - Toronto emotional speech set (TESS) Collection
  - 2 actresses
@@ -12,5 +27,17 @@ https://smartlaboratory.org/ravdess
  A better way to extract features from audio is to use Mel Frequency Cepstral Coefficients, or MFCCs for short
 - http://practicalcryptography.com/miscellaneous/machine-learning/guide-mel-frequency-cepstral-coefficients-mfccs/
 
-- MFCC is used to represent the evnolope of the short time power spectrum cause by the shapening of the vocal tract during certrain vocal inflexions.
+MFCC is used to represent the evnolope of the short time power spectrum cause by the shapening of the vocal tract during certrain vocal inflexions.
 
+    - the periodgram helps determine which frequesncies are present in a frame (20-40ms of sound). alot of this information is not actually needed to ASR 
+
+    - collecting these frames that exagerate create a more accurate representation of the strength of certain frequencies - these is done through mel filter banks
+
+    - 12 MFCC coefficients extracted at every frame 
+    - MFCC's help describe large structures of spectrum
+    - ignore fine spectral features
+    - they are pitch invariant 
+
+
+
+    wget -r --user=guest2savee --password=welcome! --no-parent http://kahlan.eps.surrey.ac.uk/savee/Data/AudioData/
