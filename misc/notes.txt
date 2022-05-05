@@ -40,4 +40,20 @@ MFCC is used to represent the evnolope of the short time power spectrum cause by
 
 
 
-    wget -r --user=guest2savee --password=welcome! --no-parent http://kahlan.eps.surrey.ac.uk/savee/Data/AudioData/
+wget -r --user=guest2savee --password=welcome! --no-parent http://kahlan.eps.surrey.ac.uk/savee/Data/AudioData/
+
+
+
+    frequency domain feature extraction requires the framing
+    of audio into overlapping frames/windows on which to perform tansforms on
+    these frames are composed of audio samples
+
+    the amplitude envolope the max value across a series of samples
+
+---------------------------------
+librosa stuff
+- the length of the numpy return is the amount of samples in the audio
+- you can pass in the sample_rate as an arg
+
+- the duration of sample is 1/sample_rate
+- 
