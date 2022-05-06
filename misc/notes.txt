@@ -56,4 +56,20 @@ librosa stuff
 - you can pass in the sample_rate as an arg
 
 - the duration of sample is 1/sample_rate
-- 
+
+
+an STFT allows you observe how the different frequency components of the classical Fourier transform evolve over time.
+ - moving from a still like image to a video like set of images 
+ - create frames and extract a DFT on each frame. 
+   - this is known as windowing 
+- both window size and frame size are measured in samples
+   - window size is the amount of samples that windowing is being applied to
+
+   - the frame size is the amount of samples that are considered on each chunk of the signal to be sent for to STFT
+
+its important that the frame size power of 2 to be able to compute the FFT (since FFT uses logarithmic arithmetic)
+
+the windowing function has an effect on the results of the STFT. such as the Hann window or Mel frequency filter banks.
+
+in an MFCC information pertaining to vocal detail would be stored in the lower end of the 'quefrency' axis, and spectral information would be stored in the higher end of the 'quefrency' axis.
+
