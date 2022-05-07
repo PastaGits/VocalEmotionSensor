@@ -155,3 +155,5 @@ cython_debug/
 *.zip
 processed_dataset.npy
 dataset.hdf5
+/misc/model.ipynb
+/misc/usingh5.py
