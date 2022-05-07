@@ -73,3 +73,4 @@ the windowing function has an effect on the results of the STFT. such as the Han
 
 in an MFCC information pertaining to vocal detail would be stored in the lower end of the 'quefrency' axis, and spectral information would be stored in the higher end of the 'quefrency' axis.
 
+If we assume that humans can perceive frequency down to 20 Hz, this frequency has period 1/20=0.05 [seconds], so two cycles would take 0.1 seconds. If the sampling rate is 𝑓𝑠=44100 (so that the Nyquist frequency is above the upper limit of audible frequencies of 20000 [Hz]), then a frame length 𝑁𝐹=4096 would have duration 𝑁𝐹/𝑓𝑠≈0.093 [seconds], which is pretty close to 0.1.
