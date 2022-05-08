@@ -157,3 +157,5 @@ processed_dataset.npy
 dataset.hdf5
 /misc/model.ipynb
 /misc/usingh5.py
+dataset.h5
+misc/model.ipynb
