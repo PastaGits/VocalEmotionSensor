@@ -74,3 +74,12 @@ the windowing function has an effect on the results of the STFT. such as the Han
 in an MFCC information pertaining to vocal detail would be stored in the lower end of the 'quefrency' axis, and spectral information would be stored in the higher end of the 'quefrency' axis.
 
 If we assume that humans can perceive frequency down to 20 Hz, this frequency has period 1/20=0.05 [seconds], so two cycles would take 0.1 seconds. If the sampling rate is 𝑓𝑠=44100 (so that the Nyquist frequency is above the upper limit of audible frequencies of 20000 [Hz]), then a frame length 𝑁𝐹=4096 would have duration 𝑁𝐹/𝑓𝑠≈0.093 [seconds], which is pretty close to 0.1.
+
+
+Max pooling is good for picking out edges in the signal. it is however not as good for preserving localized information. considering the location of edges pertain to their freciency we went with Average pooling. an average would give you a strong signal in middle and soft at the edges, leaving you with more information on where the edges of the feature were localized (which is lost with max-pooling)
+
+"We believe that while the max and average functions are rather similar, the use of average pooling encourages the network to identify the complete extent of the object. The basic intuition behind this is that the loss for average pooling benefits when the network identifies all discriminative regions of an object as compared to max pooling" 
+
+http://cnnlocalization.csail.mit.edu/Zhou_Learning_Deep_Features_CVPR_2016_paper.pdf
+
+changes in stride produce best results 

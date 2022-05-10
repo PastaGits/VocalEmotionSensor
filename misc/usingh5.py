@@ -7,20 +7,21 @@ import librosa.display
 import IPython.display as ipd
 import tensorflow as tf
 import h5py
+from tqdm import tqdm
 pwd = os.getcwd()
 # load ravdess.npy , savee.npy and tess.npy
-ravdess_data = np.load('ravdess.npy')
-savee_data = np.load('savee.npy')
-tess_data = np.load('tess.npy')
-crema_data = np.load('crema.npy')
+ravdess_data = np.load(pwd+'/data/npy_files/ravdess.npy')
+savee_data = np.load(pwd+'/data/npy_files/savee.npy')
+tess_data = np.load(pwd+'/data/npy_files/tess.npy')
+crema_data = np.load(pwd+'/data/npy_files/crema.npy')
 
-# ravdess_data.shape, savee_data.shape, tess_data.shape
 all_data = np.vstack((ravdess_data, savee_data, tess_data, crema_data))
 df = pd.DataFrame(all_data, columns=[
                   'label', 'gender', 'pathname', 'filename'])
 
-# save all data into npy file
-# np.save("all_datasets.npy", df)
+label_dict = {'n': 0, 'c': 1, 'h': 2, 'sa': 3,
+              'a': 4, 'f': 5, 'd': 6, 'su': 7}
+df['label'] = df['label'].map(label_dict)
 
 
 def plot_spec(y, sr, hop_size, y_axis):
@@ -28,42 +29,35 @@ def plot_spec(y, sr, hop_size, y_axis):
     librosa.display.specshow(
         y, sr=sr, hop_length=hop_size, x_axis='time', y_axis=y_axis)
     plt.colorbar(format='%+2.0f dB')
+    plt.show()
 
 
-# load wav files using the 'pathname' and 'filename' columns of all_data with librosa
 frame_size = 4096  # in samples
-hop_size = 512  # in samples
-temporal_chunk_size = 42  # number of temporal bins per sample
+hop_size = 256  # in samples
+temporal_chunk_size = 50  # number of temporal bins per sample
 mel_bands = 128  # number of mel bands
 silence_threshold = 40  # in  relative to peak dB
 in_dB = True  # convert to dB
-mfcc_coefficients = 12  # number of MFCC coefficients
+mfcc_coefficients = 13  # number of MFCC coefficients
 
 # total temporal bins is total_samples/hop_size
 data_cols = ['stft_data', 'mel_data', 'mfcc_data']
-data = []
-f = h5py.File('dataset_1.hdf5', 'a')
+
+f = h5py.File('E:\dataset_6ms.h5', 'a')
 
 
 def add_to_dataset(temporal_chunks):
-    # np.array([data.append(c) for c in temporal_chunks], dtype=np.float32)
-    # for index, data_name in enumerate(data_cols)
-    #     new_data = np.array([temporal_chunks[i][index] for i in range(len(temporal_chunks))])
-    #     if not f.keys().__contains__(data_name):
-    #         f.create_dataset(data_name, data=new_data,
-    #                      compression="gzip", chunks=True, maxshape=(None, (frame_size/2)+1, temporal_chunk_size))
-    #     if data_name != 'gender' or data_name!='label':
-    #         f[data_name].resize((f[data_name].shape[0] + new_data.shape[0]), axis=0)
-    #         f[data_name][-new_data.shape[0]:] = new_data
-    
     n_chunks = len(temporal_chunks)
     new_stft_data = np.array([temporal_chunks[i][0] for i in range(n_chunks)])
     new_mel_data = np.array([temporal_chunks[i][1] for i in range(n_chunks)])
     new_mfcc_data = np.array([temporal_chunks[i][2] for i in range(n_chunks)])
     new_gender_data = np.array([temporal_chunks[i][3]
-                               for i in range(n_chunks)]).reshape(n_chunks, 1).astype('S')
+                               for i in range(n_chunks)]).reshape(n_chunks, 1).astype('|S6')
     new_label_data = np.array([temporal_chunks[i][4]
-                              for i in range(n_chunks)]).reshape(n_chunks, 1).astype('S')
+                              for i in range(n_chunks)]).reshape(n_chunks, 1)
+    # plot_spec(new_mel_data[0], sr, hop_size, 'mel')
+    # plot_spec(new_mel_data[1], sr, hop_size, 'mel')
+    # return
     if len(f.keys()) == 0:
         # create separate datasets for each col
         f.create_dataset('stft', data=new_stft_data,
@@ -76,7 +70,6 @@ def add_to_dataset(temporal_chunks):
                          compression="gzip", chunks=True, maxshape=(None, 1))
         f.create_dataset('label', data=new_label_data,
                          compression="gzip", chunks=True, maxshape=(None, 1))
-        return
 
     f['stft'].resize((f['stft'].shape[0] + new_stft_data.shape[0]), axis=0)
     f['stft'][-new_stft_data.shape[0]:] = new_stft_data
@@ -94,11 +87,16 @@ def add_to_dataset(temporal_chunks):
 
     f['label'].resize((f['label'].shape[0] + new_label_data.shape[0]), axis=0)
     f['label'][-new_label_data.shape[0]:] = new_label_data
-for sample_index in range(all_data.shape[0]):
+
+
+for sample_index in tqdm(range(df.shape[0])):
     temporal_chunks = []
 
     pathname = df['pathname'][sample_index]
     filename = df['filename'][sample_index]
+
+    if df['label'][sample_index] == 7 or df['label'][sample_index] == 6:
+        continue
 
     wav, sr = librosa.load(pwd + pathname + filename)
     trimmed_wav, _ = librosa.effects.trim(wav, top_db=silence_threshold)
@@ -143,3 +141,5 @@ f.attrs['sample_rate'] = sr
 f.attrs['window_size'] = frame_size
 f.attrs['hop_size'] = hop_size
 f.close()
+
+exit()
