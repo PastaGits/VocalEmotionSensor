@@ -83,3 +83,37 @@ Max pooling is good for picking out edges in the signal. it is however not as go
 http://cnnlocalization.csail.mit.edu/Zhou_Learning_Deep_Features_CVPR_2016_paper.pdf
 
 changes in stride produce best results 
+
+
+https://arxiv.org/pdf/2106.01621v5.pdf
+
+https://www.isca-speech.org/archive/pdfs/interspeech_2017/satt17_interspeech.pdf
+
+https://www.mdpi.com/1424-8220/21/13/4399/pdf
+
+Our model uses the simple rules of CNN architecture, which means that the number of filters must be the same when the same output features map is required. If the size gets cut in half or is reduced up to a half, then the number of filters must be double in the convolution layer to sustain the complexity in each layer.
+
+https://www.ncbi.nlm.nih.gov/pmc/articles/PMC7570673/
+
+
+https://www.researchgate.net/publication/346688712_Dying_ReLU_and_Initialization_Theory_and_Numerical_Examples
+
+https://arxiv.org/pdf/1906.10891.pdf
+
+https://arxiv.org/pdf/1608.04363.pdf
+
+tried to split it between gender and still no accurate
+
+model running leaky relu seems to do well (63_2)
+
+The deep convolutional neural network (CNN) architecture
+proposed in this study is comprised of 3 convolutional layers
+interleaved with 2 pooling operations, followed by 2 fully connected (dense) 
+
+We apply strided
+max-pooling after the first two convolutional layers ` ∈ {1, 2}
+using a stride size equal to the pooling dimensions 
+ which reduces the dimensions of the output feature
+maps and consequently speeds up training and builds some
+scale invariance into the network
+layers
