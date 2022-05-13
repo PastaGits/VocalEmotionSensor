@@ -117,3 +117,9 @@ using a stride size equal to the pooling dimensions
 maps and consequently speeds up training and builds some
 scale invariance into the network
 layers
+
+----------
+i have a 39x50 image
+i want to pool 2x2 but skip a pixel row in the y-axis stride should be 3x2 but every 3rd row should be saved. 
+such that you should end up with a 26x25 image and a 13x50 image.
+After which i can apply a convolutional layer on the 13x50 with a (1,2) stride and a (1,2) pooling.

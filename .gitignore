@@ -163,5 +163,5 @@ misc/model.ipynb
 cnn_61.h5
 cnn_62_2.h5
 /checkpoints/*
-**/**.h5
+cnn_60.h5
 make_img.sh
